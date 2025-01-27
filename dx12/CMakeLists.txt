@@ -12,7 +12,9 @@ add_compile_definitions(_UNICODE UNICODE)
 
 add_executable(dx12
 	WIN32
-	main.cpp "Window.h" "Window.cpp")
+	Window.h
+	Window.cpp
+	main.cpp)
 
 target_include_directories(dx12
 	PRIVATE
