@@ -1,5 +1,7 @@
 #include "DX12Window.h"
 
+#include "Error.h"
+
 namespace zdx
 {
 
@@ -23,6 +25,10 @@ void DX12Window::OnInit()
         }
     }
 #endif
+
+    ComPtr<IDXGIFactory4> factory;
+    ThrowIfFailed(CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&factory)));
+
 }
 
 } // namespace zdx

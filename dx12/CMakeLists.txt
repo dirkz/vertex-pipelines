@@ -29,4 +29,4 @@ target_include_directories(dx12
 target_precompile_headers(dx12
 	PRIVATE stdafx.h)
 
-target_link_libraries(dx12 d3d12.lib)
+target_link_libraries(dx12 d3d12.lib dxgi.lib)
