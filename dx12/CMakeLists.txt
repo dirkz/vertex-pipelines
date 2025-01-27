@@ -19,7 +19,8 @@ add_executable(dx12
 	"WindowCallback.h"
 	"WindowCallback.h"
 	"DX12Window.h"
-	"DX12Window.cpp")
+	"DX12Window.cpp"
+	"Error.h")
 
 target_include_directories(dx12
 	PRIVATE
