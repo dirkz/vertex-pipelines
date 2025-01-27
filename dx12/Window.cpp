@@ -49,6 +49,8 @@ int Window::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         return 0;
     }
 
+    m_callback->OnInit();
+
     ShowWindow(hwnd, nShowCmd);
 
     MSG msg = {};

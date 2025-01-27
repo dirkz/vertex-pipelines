@@ -12,9 +12,14 @@ add_compile_definitions(_UNICODE UNICODE)
 
 add_executable(dx12
 	WIN32
+	WindowCallback.h
 	Window.h
 	Window.cpp
-	main.cpp)
+	main.cpp
+	"WindowCallback.h"
+	"WindowCallback.h"
+	"DX12Window.h"
+	"DX12Window.cpp")
 
 target_include_directories(dx12
 	PRIVATE
