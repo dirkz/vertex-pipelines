@@ -26,7 +26,7 @@ add_executable(dx12
 	SwapChain.h
 	SwapChain.cpp
 	FrameData.h
-	FrameData.cpp)
+	FrameData.cpp "Constants.h")
 
 target_include_directories(dx12
 	PRIVATE

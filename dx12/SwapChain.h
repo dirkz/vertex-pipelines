@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 
+#include "Constants.h"
 #include "DescriptorHeap.h"
 
 namespace zdx
@@ -15,7 +16,7 @@ struct SwapChain
   private:
     ComPtr<IDXGISwapChain3> m_swapChain;
     DescriptorHeap m_renderTargetHeap;
-    std::vector<ComPtr<ID3D12Resource>> m_renderTargets;
+    std::array<ComPtr<ID3D12Resource>, NumFrames> m_renderTargets;
 };
 
 } // namespace zdx

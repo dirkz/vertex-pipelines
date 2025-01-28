@@ -6,8 +6,7 @@ namespace zdx
 
 SwapChain::SwapChain(UINT numFrames, IDXGIFactory4 *pFactory, ID3D12Device *pDevice,
                      ID3D12CommandQueue *pCommandQueue, HWND hwnd, UINT width, UINT height)
-    : m_renderTargetHeap{pDevice, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, numFrames, false},
-      m_renderTargets(numFrames)
+    : m_renderTargetHeap{pDevice, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, numFrames, false}
 {
     // Describe and create the swap chain.
     DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
