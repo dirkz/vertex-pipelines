@@ -24,7 +24,9 @@ add_executable(dx12
 	DescriptorHeap.h
 	DescriptorHeap.cpp
 	SwapChain.h
-	SwapChain.cpp)
+	SwapChain.cpp
+	FrameData.h
+	FrameData.cpp)
 
 target_include_directories(dx12
 	PRIVATE

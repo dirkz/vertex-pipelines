@@ -18,4 +18,4 @@ struct SwapChain
     std::vector<ComPtr<ID3D12Resource>> m_renderTargets;
 };
 
-}; // namespace zdx
+} // namespace zdx

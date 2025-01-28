@@ -46,4 +46,4 @@ D3D12_GPU_DESCRIPTOR_HANDLE DescriptorHeap::HandleGPU(UINT index)
     return CD3DX12_GPU_DESCRIPTOR_HANDLE(m_hGPUStart, index, m_incrementSize);
 }
 
-}; // namespace zdx
+} // namespace zdx
