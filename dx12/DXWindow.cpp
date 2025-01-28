@@ -116,6 +116,11 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
     ThrowIfFailed(m_device->CreateCommandList1(0, D3D12_COMMAND_LIST_TYPE_DIRECT,
                                                D3D12_COMMAND_LIST_FLAG_NONE,
                                                IID_PPV_ARGS(m_commandList.GetAddressOf())));
+
+    for (UINT n = 0; n < NumFrames; ++n)
+    {
+        m_frames[n] = FrameData{m_device.Get()};
+    }
 }
 
 } // namespace zdx

@@ -4,6 +4,7 @@
 
 #include "Constants.h"
 #include "DescriptorHeap.h"
+#include "FrameData.h"
 #include "SwapChain.h"
 #include "WindowCallback.h"
 
@@ -21,6 +22,7 @@ struct DXWindow : WindowCallback
     ComPtr<ID3D12CommandQueue> m_commandQueue;
     std::unique_ptr<SwapChain> m_swapChain;
     ComPtr<ID3D12GraphicsCommandList> m_commandList;
+    std::array<FrameData, NumFrames> m_frames;
 };
 
 } // namespace zdx
