@@ -15,6 +15,7 @@ struct DX12Window : WindowCallback
 
   private:
     ComPtr<ID3D12Device> m_device;
+    ComPtr<ID3D12CommandQueue> m_commandQueue;
 };
 
 } // namespace zdx
