@@ -120,6 +120,9 @@ void DX12Window::OnInit(HWND hwnd, UINT width, UINT height)
     ThrowIfFailed(factory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER));
 
     ThrowIfFailed(swapChain.As(&m_swapChain));
+
+    m_renderTargetHeap = std::make_unique<DescriptorHeap>(
+        m_device.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, NumFrames, false);
 }
 
 } // namespace zdx

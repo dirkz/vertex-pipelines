@@ -18,7 +18,15 @@ DescriptorHeap::DescriptorHeap(ID3D12Device *pDevice, D3D12_DESCRIPTOR_HEAP_TYPE
         pDevice->CreateDescriptorHeap(&desc, IID_PPV_ARGS(m_descriptorHeap.GetAddressOf())));
 
     m_hCPUStart = m_descriptorHeap->GetCPUDescriptorHandleForHeapStart();
-    m_hGPUStart = m_descriptorHeap->GetGPUDescriptorHandleForHeapStart();
+
+    if (bShaderVisible)
+    {
+        m_hGPUStart = m_descriptorHeap->GetGPUDescriptorHandleForHeapStart();
+    }
+    else
+    {
+        m_hGPUStart = CD3DX12_GPU_DESCRIPTOR_HANDLE{};
+    }
 
     m_incrementSize = pDevice->GetDescriptorHandleIncrementSize(heapType);
 }
