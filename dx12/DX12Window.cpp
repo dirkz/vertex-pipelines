@@ -64,7 +64,7 @@ void DX12Window::GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppA
     *ppAdapter = adapter.Detach();
 }
 
-void DX12Window::OnInit()
+void DX12Window::OnInit(HWND hwnd, UINT width, UINT height)
 {
     OutputDebugString(L"DX12Window::OnInit()\n");
 
