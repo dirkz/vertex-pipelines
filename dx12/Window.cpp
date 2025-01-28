@@ -10,14 +10,14 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
     if (uMsg == WM_CREATE)
     {
         const CREATESTRUCT *pCreateStruct = reinterpret_cast<const CREATESTRUCT *>(lParam);
-        const WindowCallback *pCallback =
-            reinterpret_cast<const WindowCallback *>(pCreateStruct->lpCreateParams);
-        SetWindowLong(hwnd, GWLP_USERDATA, reinterpret_cast<LONG>(pCallback));
+        WindowCallback *pCallback =
+            reinterpret_cast<WindowCallback *>(pCreateStruct->lpCreateParams);
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pCallback));
         return 0;
     }
 
     WindowCallback *pCallback =
-        reinterpret_cast<WindowCallback *>(GetWindowLong(hwnd, GWLP_USERDATA));
+        reinterpret_cast<WindowCallback *>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 
     if (pCallback)
     {

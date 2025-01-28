@@ -129,7 +129,6 @@ void DXWindow::OnUpdate()
 
 void DXWindow::OnRender()
 {
-    OutputDebugString(L"OnRender()\n");
 }
 
 } // namespace zdx
