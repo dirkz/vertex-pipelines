@@ -12,10 +12,11 @@ void DX12Window::GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppA
     ComPtr<IDXGIAdapter1> adapter;
 
     ComPtr<IDXGIFactory6> factory6;
-    if (SUCCEEDED(pFactory->QueryInterface(IID_PPV_ARGS(&factory6))))
+    if (SUCCEEDED(pFactory->QueryInterface(IID_PPV_ARGS(factory6.GetAddressOf()))))
     {
-        for (UINT adapterIndex = 0; SUCCEEDED(factory6->EnumAdapterByGpuPreference(
-                 adapterIndex, DXGI_GPU_PREFERENCE_UNSPECIFIED, IID_PPV_ARGS(&adapter)));
+        for (UINT adapterIndex = 0; SUCCEEDED(
+                 factory6->EnumAdapterByGpuPreference(adapterIndex, DXGI_GPU_PREFERENCE_UNSPECIFIED,
+                                                      IID_PPV_ARGS(adapter.GetAddressOf())));
              ++adapterIndex)
         {
             DXGI_ADAPTER_DESC1 desc;
@@ -39,7 +40,8 @@ void DX12Window::GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppA
 
     if (adapter.Get() == nullptr)
     {
-        for (UINT adapterIndex = 0; SUCCEEDED(pFactory->EnumAdapters1(adapterIndex, &adapter));
+        for (UINT adapterIndex = 0;
+             SUCCEEDED(pFactory->EnumAdapters1(adapterIndex, adapter.GetAddressOf()));
              ++adapterIndex)
         {
             DXGI_ADAPTER_DESC1 desc;
@@ -75,7 +77,7 @@ void DX12Window::OnInit(HWND hwnd, UINT width, UINT height)
     // NOTE: Enabling the debug layer after device creation will invalidate the active device.
     {
         ComPtr<ID3D12Debug> debugController;
-        if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
+        if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(debugController.GetAddressOf()))))
         {
             debugController->EnableDebugLayer();
 
@@ -86,20 +88,24 @@ void DX12Window::OnInit(HWND hwnd, UINT width, UINT height)
 #endif
 
     ComPtr<IDXGIFactory4> factory;
-    ThrowIfFailed(CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&factory)));
+    ThrowIfFailed(CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(factory.GetAddressOf())));
 
     ComPtr<IDXGIAdapter1> hardwareAdapter;
-    GetHardwareAdapter(factory.Get(), &hardwareAdapter);
+    GetHardwareAdapter(factory.Get(), hardwareAdapter.GetAddressOf());
 
-    ThrowIfFailed(
-        D3D12CreateDevice(hardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&m_device)));
+    ComPtr<ID3D12Device> device;
+    ThrowIfFailed(D3D12CreateDevice(hardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0,
+                                    IID_PPV_ARGS(device.GetAddressOf())));
+
+    ThrowIfFailed(device.As(&m_device));
 
     // Describe and create the command queue.
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
     queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
     queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 
-    ThrowIfFailed(m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_commandQueue)));
+    ThrowIfFailed(
+        m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(m_commandQueue.GetAddressOf())));
 
     m_swapChain = std::make_unique<SwapChain>(NumFrames, factory.Get(), m_device.Get(),
                                               m_commandQueue.Get(), hwnd, width, height);

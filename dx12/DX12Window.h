@@ -18,7 +18,7 @@ struct DX12Window : WindowCallback
     void OnInit(HWND hwnd, UINT width, UINT height);
 
   private:
-    ComPtr<ID3D12Device> m_device;
+    ComPtr<ID3D12Device4> m_device;
     ComPtr<ID3D12CommandQueue> m_commandQueue;
     std::unique_ptr<SwapChain> m_swapChain;
 };
