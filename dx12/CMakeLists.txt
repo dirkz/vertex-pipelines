@@ -22,7 +22,9 @@ add_executable(dx12
 	DX12Window.cpp
 	Error.h
 	DescriptorHeap.h
-	DescriptorHeap.cpp)
+	DescriptorHeap.cpp
+	SwapChain.h
+	SwapChain.cpp)
 
 target_include_directories(dx12
 	PRIVATE

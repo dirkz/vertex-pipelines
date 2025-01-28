@@ -4,6 +4,7 @@
 
 #include "WindowCallback.h"
 #include "DescriptorHeap.h"
+#include "SwapChain.h"
 
 namespace zdx
 {
@@ -19,8 +20,7 @@ struct DX12Window : WindowCallback
   private:
     ComPtr<ID3D12Device> m_device;
     ComPtr<ID3D12CommandQueue> m_commandQueue;
-    ComPtr<IDXGISwapChain3> m_swapChain;
-    std::unique_ptr<DescriptorHeap> m_renderTargetHeap;
+    std::unique_ptr<SwapChain> m_swapChain;
 };
 
 } // namespace zdx
