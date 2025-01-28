@@ -15,7 +15,9 @@ struct DXWindow : WindowCallback
 {
     static void GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppAdapter);
 
-    void OnInit(HWND hwnd, UINT width, UINT height);
+    void OnInit(HWND hwnd, UINT width, UINT height) override;
+    void OnUpdate() override;
+    void OnRender() override;
 
   private:
     ComPtr<ID3D12Device4> m_device;

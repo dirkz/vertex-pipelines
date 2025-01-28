@@ -123,4 +123,12 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
     }
 }
 
+void DXWindow::OnUpdate()
+{
+}
+
+void DXWindow::OnRender()
+{
+}
+
 } // namespace zdx
