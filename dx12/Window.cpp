@@ -28,6 +28,8 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             return 0;
 
         case WM_PAINT:
+            pCallback->OnUpdate();
+            pCallback->OnRender();
             return 0;
         }
     }
