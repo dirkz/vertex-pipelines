@@ -16,11 +16,13 @@ add_executable(dx12
 	Window.h
 	Window.cpp
 	main.cpp
-	"WindowCallback.h"
-	"WindowCallback.h"
-	"DX12Window.h"
-	"DX12Window.cpp"
-	"Error.h")
+	WindowCallback.h
+	WindowCallback.h
+	DX12Window.h
+	DX12Window.cpp
+	Error.h
+	DescriptorHeap.h
+	DescriptorHeap.cpp)
 
 target_include_directories(dx12
 	PRIVATE

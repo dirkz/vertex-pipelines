@@ -9,6 +9,8 @@ namespace zdx
 
 struct DX12Window : WindowCallback
 {
+    const UINT NumFrames = 2;
+
     static void GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppAdapter);
 
     void OnInit(HWND hwnd, UINT width, UINT height);
@@ -16,6 +18,7 @@ struct DX12Window : WindowCallback
   private:
     ComPtr<ID3D12Device> m_device;
     ComPtr<ID3D12CommandQueue> m_commandQueue;
+    ComPtr<IDXGISwapChain3> m_swapChain;
 };
 
 } // namespace zdx
