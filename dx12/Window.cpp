@@ -7,14 +7,31 @@ namespace zdx
 
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    switch (uMsg)
+    if (uMsg == WM_CREATE)
     {
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-    case WM_PAINT:
+        const CREATESTRUCT *pCreateStruct = reinterpret_cast<const CREATESTRUCT *>(lParam);
+        const WindowCallback *pCallback =
+            reinterpret_cast<const WindowCallback *>(pCreateStruct->lpCreateParams);
+        SetWindowLong(hwnd, GWLP_USERDATA, reinterpret_cast<LONG>(pCallback));
         return 0;
     }
+
+    WindowCallback *pCallback =
+        reinterpret_cast<WindowCallback *>(GetWindowLong(hwnd, GWLP_USERDATA));
+
+    if (pCallback)
+    {
+        switch (uMsg)
+        {
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+
+        case WM_PAINT:
+            return 0;
+        }
+    }
+
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
@@ -42,7 +59,7 @@ int Window::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     RegisterClass(&wc);
 
     HWND hwnd = CreateWindowEx(0, CLASS_NAME, L"DX Vertex Pipeline", WS_OVERLAPPEDWINDOW, left, top,
-                               width, height, nullptr, nullptr, hInstance, nullptr);
+                               width, height, nullptr, nullptr, hInstance, m_callback);
 
     if (hwnd == NULL)
     {
