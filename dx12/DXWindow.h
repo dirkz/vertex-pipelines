@@ -9,7 +9,7 @@
 namespace zdx
 {
 
-struct DX12Window : WindowCallback
+struct DXWindow : WindowCallback
 {
     const UINT NumFrames = 2;
 

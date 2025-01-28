@@ -1,11 +1,11 @@
-#include "DX12Window.h"
+#include "DXWindow.h"
 
 #include "Error.h"
 
 namespace zdx
 {
 
-void DX12Window::GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppAdapter)
+void DXWindow::GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppAdapter)
 {
     *ppAdapter = nullptr;
 
@@ -66,7 +66,7 @@ void DX12Window::GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppA
     *ppAdapter = adapter.Detach();
 }
 
-void DX12Window::OnInit(HWND hwnd, UINT width, UINT height)
+void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
 {
     OutputDebugString(L"DX12Window::OnInit()\n");
 

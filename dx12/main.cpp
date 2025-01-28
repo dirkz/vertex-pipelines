@@ -2,7 +2,7 @@
 
 #include "WindowCallback.h"
 #include "Window.h"
-#include "DX12Window.h"
+#include "DXWindow.h"
 
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
                     _In_ LPWSTR lpCmdLine, _In_ int nShowCmd)
@@ -11,7 +11,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     int returnValue = 0;
     {
-        zdx::DX12Window dxWindow{};
+        zdx::DXWindow dxWindow{};
         zdx::Window window{&dxWindow};
         returnValue = window.WinMain(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
     }

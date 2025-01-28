@@ -18,8 +18,8 @@ add_executable(dx12
 	main.cpp
 	WindowCallback.h
 	WindowCallback.h
-	DX12Window.h
-	DX12Window.cpp
+	DXWindow.h
+	DXWindow.cpp
 	Error.h
 	DescriptorHeap.h
 	DescriptorHeap.cpp
