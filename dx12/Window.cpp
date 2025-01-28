@@ -42,7 +42,7 @@ int Window::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     RegisterClass(&wc);
 
     HWND hwnd = CreateWindowEx(0, CLASS_NAME, L"DX Vertex Pipeline", WS_OVERLAPPEDWINDOW, left, top,
-                               width, height, NULL, NULL, hInstance, NULL);
+                               width, height, nullptr, nullptr, hInstance, nullptr);
 
     if (hwnd == NULL)
     {
