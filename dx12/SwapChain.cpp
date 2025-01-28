@@ -6,7 +6,8 @@ namespace zdx
 
 SwapChain::SwapChain(UINT numFrames, IDXGIFactory4 *pFactory, ID3D12Device *pDevice,
                      ID3D12CommandQueue *pCommandQueue, HWND hwnd, UINT width, UINT height)
-    : m_renderTargets(numFrames)
+    : m_renderTargetHeap{pDevice, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, numFrames, false},
+      m_renderTargets(numFrames)
 {
     // Describe and create the swap chain.
     DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
@@ -25,14 +26,11 @@ SwapChain::SwapChain(UINT numFrames, IDXGIFactory4 *pFactory, ID3D12Device *pDev
 
     ThrowIfFailed(swapChain.As(&m_swapChain));
 
-    m_renderTargetHeap =
-        std::make_unique<DescriptorHeap>(pDevice, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, numFrames, false);
-
     for (UINT n = 0; n < numFrames; n++)
     {
         ThrowIfFailed(m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])));
         pDevice->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr,
-                                        m_renderTargetHeap->HandleCPU(n));
+                                        m_renderTargetHeap.HandleCPU(n));
     }
 }
 

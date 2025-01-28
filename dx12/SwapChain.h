@@ -14,7 +14,7 @@ struct SwapChain
 
   private:
     ComPtr<IDXGISwapChain3> m_swapChain;
-    std::unique_ptr<DescriptorHeap> m_renderTargetHeap;
+    DescriptorHeap m_renderTargetHeap;
     std::vector<ComPtr<ID3D12Resource>> m_renderTargets;
 };
 
