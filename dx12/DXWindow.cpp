@@ -112,6 +112,10 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
 
     // Don't allow fullscreen transitions.
     ThrowIfFailed(factory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER));
+
+    ThrowIfFailed(m_device->CreateCommandList1(0, D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                               D3D12_COMMAND_LIST_FLAG_NONE,
+                                               IID_PPV_ARGS(m_commandList.GetAddressOf())));
 }
 
 } // namespace zdx
