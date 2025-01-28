@@ -2,16 +2,16 @@
 
 #include "stdafx.h"
 
-#include "WindowCallback.h"
 #include "DescriptorHeap.h"
 #include "SwapChain.h"
+#include "WindowCallback.h"
 
 namespace zdx
 {
 
 struct DXWindow : WindowCallback
 {
-    const UINT NumFrames = 2;
+    static constexpr UINT NumFrames = 2;
 
     static void GetHardwareAdapter(IDXGIFactory1 *pFactory, IDXGIAdapter1 **ppAdapter);
 
