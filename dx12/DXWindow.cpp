@@ -132,9 +132,15 @@ void DXWindow::OnRender()
     UINT frameIndex = m_swapChain->GetCurrentBackBufferIndex();
     Frame *pFrame = m_frames[frameIndex].get();
 
+    // Wait for any previous work for this frame
+    // (that has been scheduled on the command queue).
+    pFrame->Wait();
+
     ThrowIfFailed(pFrame->CommandAllocator()->Reset());
     ThrowIfFailed(m_commandList->Reset(pFrame->CommandAllocator(), nullptr));
     ThrowIfFailed(m_commandList->Close());
+
+    pFrame->Signal(m_commandQueue.Get());
 }
 
 } // namespace zdx
