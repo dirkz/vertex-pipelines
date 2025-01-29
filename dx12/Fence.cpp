@@ -34,7 +34,6 @@ void Fence::Signal(ID3D12CommandQueue *pCommandQueue)
 
 void Fence::Wait()
 {
-
     if (m_fence->GetCompletedValue() < m_value)
     {
         ThrowIfFailed(m_fence->SetEventOnCompletion(m_value, m_event));
