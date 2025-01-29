@@ -119,7 +119,7 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
 
     for (UINT n = 0; n < NumFrames; ++n)
     {
-        m_frames[n] = FrameData{m_device.Get()};
+        m_frames[n] = Frame{m_device.Get()};
     }
 }
 

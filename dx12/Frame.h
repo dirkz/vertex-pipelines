@@ -5,14 +5,14 @@
 namespace zdx
 {
 
-struct FrameData
+struct Frame
 {
     /// <summary>
-    /// Only for allowing arrays of empty <code>FrameData</code>.
+    /// Only for allowing arrays of empty <code>Frame</code>.
     /// </summary>
-    FrameData() {};
+    Frame() {};
 
-    FrameData(ID3D12Device *pDevice);
+    Frame(ID3D12Device *pDevice);
 
   private:
     ComPtr<ID3D12CommandAllocator> m_commandAllocator;
