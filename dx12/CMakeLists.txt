@@ -34,8 +34,8 @@ target_precompile_headers(dx12
 	PRIVATE stdafx.h)
 
 add_subdirectory(windows)
-include_directories(windows)
 
 target_link_libraries(dx12 windows)
+target_include_directories(dx12 PRIVATE windows)
 
 target_link_libraries(dx12 d3d12.lib dxgi.lib)
