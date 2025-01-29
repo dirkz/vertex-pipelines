@@ -148,6 +148,10 @@ void DXWindow::OnRender()
     // Indicate that the back buffer will be used as a render target.
     m_commandList->ResourceBarrier(1, &transitionPresentToRenderTarget);
 
+    // Record commands.
+    const float clearColor[] = {0.0f, 0.2f, 0.4f, 1.0f};
+    m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+
     auto transitionRenderTargetToPresent = CD3DX12_RESOURCE_BARRIER::Transition(
         pRenderTarget, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 
@@ -157,7 +161,7 @@ void DXWindow::OnRender()
     ThrowIfFailed(m_commandList->Close());
 
     // Execute the command list.
-    ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
+    ID3D12CommandList *ppCommandLists[] = {m_commandList.Get()};
     m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
     // Present the frame.
