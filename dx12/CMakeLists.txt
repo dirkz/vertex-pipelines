@@ -12,12 +12,7 @@ add_compile_definitions(_UNICODE UNICODE)
 
 add_executable(dx12
 	WIN32
-	WindowCallback.h
-	Window.h
-	Window.cpp
 	main.cpp
-	WindowCallback.h
-	WindowCallback.h
 	DXWindow.h
 	DXWindow.cpp
 	Error.h
@@ -37,5 +32,10 @@ target_include_directories(dx12
 
 target_precompile_headers(dx12
 	PRIVATE stdafx.h)
+
+add_subdirectory(windows)
+include_directories(windows)
+
+target_link_libraries(dx12 windows)
 
 target_link_libraries(dx12 d3d12.lib dxgi.lib)
