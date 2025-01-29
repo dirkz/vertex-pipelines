@@ -129,6 +129,8 @@ void DXWindow::OnUpdate()
 
 void DXWindow::OnRender()
 {
+    UINT frameIndex = m_swapChain->GetCurrentBackBufferIndex();
+    Frame frame = m_frames[frameIndex];
 }
 
 } // namespace zdx

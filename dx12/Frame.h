@@ -14,6 +14,8 @@ struct Frame
 
     Frame(ID3D12Device *pDevice);
 
+    ID3D12CommandAllocator *CommandAllocator();
+
   private:
     ComPtr<ID3D12CommandAllocator> m_commandAllocator;
 };

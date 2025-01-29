@@ -33,4 +33,19 @@ SwapChain::SwapChain(IDXGIFactory4 *pFactory, ID3D12Device *pDevice,
     }
 }
 
+UINT SwapChain::GetCurrentBackBufferIndex()
+{
+    return m_swapChain->GetCurrentBackBufferIndex();
+}
+
+ID3D12Resource *SwapChain::CurrentRenderTarget()
+{
+    return m_renderTargets[m_swapChain->GetCurrentBackBufferIndex()].Get();
+}
+
+CD3DX12_CPU_DESCRIPTOR_HANDLE SwapChain::CurrentRenderTargetDescriptorHandle(UINT index)
+{
+    return m_renderTargetHeap.HandleCPU(index);
+}
+
 } // namespace zdx

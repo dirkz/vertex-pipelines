@@ -11,4 +11,9 @@ Frame::Frame(ID3D12Device *pDevice)
                                                   IID_PPV_ARGS(m_commandAllocator.GetAddressOf())));
 }
 
+ID3D12CommandAllocator *Frame::CommandAllocator()
+{
+    return m_commandAllocator.Get();
+}
+
 } // namespace zdx

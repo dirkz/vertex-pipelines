@@ -36,12 +36,12 @@ DescriptorHeap::operator ID3D12DescriptorHeap *()
     return m_descriptorHeap.Get();
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE DescriptorHeap::HandleCPU(UINT index)
+CD3DX12_CPU_DESCRIPTOR_HANDLE DescriptorHeap::HandleCPU(UINT index)
 {
     return CD3DX12_CPU_DESCRIPTOR_HANDLE(m_hCPUStart, index, m_incrementSize);
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE DescriptorHeap::HandleGPU(UINT index)
+CD3DX12_GPU_DESCRIPTOR_HANDLE DescriptorHeap::HandleGPU(UINT index)
 {
     return CD3DX12_GPU_DESCRIPTOR_HANDLE(m_hGPUStart, index, m_incrementSize);
 }
