@@ -26,11 +26,11 @@ target_include_directories(dx12
 	${CMAKE_CURRENT_LIST_DIR}/../DirectX-Headers/include/directx)
 
 add_subdirectory(windows)
-target_link_libraries(dx12 windows)
-target_include_directories(dx12 PRIVATE windows)
+target_link_libraries(dx12 PRIVATE windows)
+target_include_directories(dx12 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/windows)
 
 add_subdirectory(dxutil)
-target_link_libraries(dx12 dxutil)
-target_include_directories(dx12 PRIVATE dxutil)
+target_link_libraries(dx12 PRIVATE dxutil)
+target_include_directories(dx12 PRIVATE ${CMAKE_CURRENT_LIST_DIR}/dxutil)
 
-target_link_libraries(dx12 d3d12.lib dxgi.lib)
+target_link_libraries(dx12 PRIVATE d3d12.lib dxgi.lib)
