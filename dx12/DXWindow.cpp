@@ -131,6 +131,10 @@ void DXWindow::OnRender()
 {
     UINT frameIndex = m_swapChain->GetCurrentBackBufferIndex();
     Frame *pFrame = m_frames[frameIndex].get();
+
+    ThrowIfFailed(pFrame->CommandAllocator()->Reset());
+    ThrowIfFailed(m_commandList->Reset(pFrame->CommandAllocator(), nullptr));
+    ThrowIfFailed(m_commandList->Close());
 }
 
 } // namespace zdx
