@@ -15,27 +15,23 @@ add_executable(dx12
 	main.cpp
 	DXWindow.h
 	DXWindow.cpp
-	Error.h
-	DescriptorHeap.h
-	DescriptorHeap.cpp
-	SwapChain.h
-	SwapChain.cpp
 	Frame.h
 	Frame.cpp
-	Constants.h
-	Fence.h
-	Fence.cpp)
+	"dxutil/Constants.h")
+
+target_precompile_headers(dx12
+	PRIVATE stdafx.h)
 
 target_include_directories(dx12
 	PRIVATE
 	${CMAKE_CURRENT_LIST_DIR}/../DirectX-Headers/include/directx)
 
-target_precompile_headers(dx12
-	PRIVATE stdafx.h)
-
 add_subdirectory(windows)
-
 target_link_libraries(dx12 windows)
 target_include_directories(dx12 PRIVATE windows)
+
+add_subdirectory(dxutil)
+target_link_libraries(dx12 dxutil)
+target_include_directories(dx12 PRIVATE dxutil)
 
 target_link_libraries(dx12 d3d12.lib dxgi.lib)
