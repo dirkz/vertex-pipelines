@@ -142,6 +142,18 @@ void DXWindow::OnRender()
     ID3D12Resource *pRenderTarget = m_swapChain->CurrentRenderTarget();
     CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle = m_swapChain->CurrentRenderTargetDescriptorHandle();
 
+    auto transitionPresentToRenderTarget = CD3DX12_RESOURCE_BARRIER::Transition(
+        pRenderTarget, D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+    // Indicate that the back buffer will be used as a render target.
+    m_commandList->ResourceBarrier(1, &transitionPresentToRenderTarget);
+
+    auto transitionRenderTargetToPresent = CD3DX12_RESOURCE_BARRIER::Transition(
+        pRenderTarget, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+
+    // Indicate that the back buffer will now be used to present.
+    m_commandList->ResourceBarrier(1, &transitionRenderTargetToPresent);
+
     ThrowIfFailed(m_commandList->Close());
 
     pFrame->Signal(m_commandQueue.Get());
