@@ -27,7 +27,9 @@ add_executable(dx12
 	SwapChain.cpp
 	Frame.h
 	Frame.cpp
-	Constants.h)
+	Constants.h
+	Fence.h
+	Fence.cpp)
 
 target_include_directories(dx12
 	PRIVATE
