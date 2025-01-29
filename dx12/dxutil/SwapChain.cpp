@@ -43,9 +43,9 @@ ID3D12Resource *SwapChain::CurrentRenderTarget()
     return m_renderTargets[m_swapChain->GetCurrentBackBufferIndex()].Get();
 }
 
-CD3DX12_CPU_DESCRIPTOR_HANDLE SwapChain::CurrentRenderTargetDescriptorHandle(UINT index)
+CD3DX12_CPU_DESCRIPTOR_HANDLE SwapChain::CurrentRenderTargetDescriptorHandle()
 {
-    return m_renderTargetHeap.HandleCPU(index);
+    return m_renderTargetHeap.HandleCPU(m_swapChain->GetCurrentBackBufferIndex());
 }
 
 } // namespace zdx

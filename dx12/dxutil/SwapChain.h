@@ -15,7 +15,7 @@ struct SwapChain
 
     UINT GetCurrentBackBufferIndex();
     ID3D12Resource *CurrentRenderTarget();
-    CD3DX12_CPU_DESCRIPTOR_HANDLE CurrentRenderTargetDescriptorHandle(UINT index);
+    CD3DX12_CPU_DESCRIPTOR_HANDLE CurrentRenderTargetDescriptorHandle();
 
   private:
     ComPtr<IDXGISwapChain3> m_swapChain;

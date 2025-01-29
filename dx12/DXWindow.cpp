@@ -138,6 +138,10 @@ void DXWindow::OnRender()
 
     ThrowIfFailed(pFrame->CommandAllocator()->Reset());
     ThrowIfFailed(m_commandList->Reset(pFrame->CommandAllocator(), nullptr));
+
+    ID3D12Resource *pRenderTarget = m_swapChain->CurrentRenderTarget();
+    CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle = m_swapChain->CurrentRenderTargetDescriptorHandle();
+
     ThrowIfFailed(m_commandList->Close());
 
     pFrame->Signal(m_commandQueue.Get());
