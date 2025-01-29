@@ -10,8 +10,8 @@ namespace zdx
 
 struct SwapChain
 {
-    SwapChain(UINT numFrames, IDXGIFactory4 *pFactory, ID3D12Device *pDevice,
-              ID3D12CommandQueue *pCommandQueue, HWND hwnd, UINT width, UINT height);
+    SwapChain(IDXGIFactory4 *pFactory, ID3D12Device *pDevice, ID3D12CommandQueue *pCommandQueue,
+              HWND hwnd, UINT width, UINT height);
 
   private:
     ComPtr<IDXGISwapChain3> m_swapChain;

@@ -107,8 +107,8 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
     ThrowIfFailed(
         m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(m_commandQueue.GetAddressOf())));
 
-    m_swapChain = std::make_unique<SwapChain>(NumFrames, factory.Get(), m_device.Get(),
-                                              m_commandQueue.Get(), hwnd, width, height);
+    m_swapChain = std::make_unique<SwapChain>(factory.Get(), m_device.Get(), m_commandQueue.Get(),
+                                              hwnd, width, height);
 
     // Don't allow fullscreen transitions.
     ThrowIfFailed(factory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER));
