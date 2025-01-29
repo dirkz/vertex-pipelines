@@ -16,8 +16,7 @@ add_executable(dx12
 	DXWindow.h
 	DXWindow.cpp
 	Frame.h
-	Frame.cpp
-	"dxutil/Constants.h")
+	Frame.cpp)
 
 target_precompile_headers(dx12
 	PRIVATE stdafx.h)
