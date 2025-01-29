@@ -161,7 +161,7 @@ void DXWindow::OnRender()
     m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
     // Present the frame.
-    ThrowIfFailed((*m_swapChain)->Present(1, 0));
+    m_swapChain->Present(1, 0);
 
     pFrame->Signal(m_commandQueue.Get());
 }

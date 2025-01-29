@@ -17,7 +17,7 @@ struct SwapChain
     ID3D12Resource *CurrentRenderTarget();
     CD3DX12_CPU_DESCRIPTOR_HANDLE CurrentRenderTargetDescriptorHandle();
 
-    IDXGISwapChain3 *operator->();
+    void Present(UINT syncInterval, UINT flags);
 
   private:
     ComPtr<IDXGISwapChain3> m_swapChain;

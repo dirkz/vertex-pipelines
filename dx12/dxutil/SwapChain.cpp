@@ -48,9 +48,9 @@ CD3DX12_CPU_DESCRIPTOR_HANDLE SwapChain::CurrentRenderTargetDescriptorHandle()
     return m_renderTargetHeap.HandleCPU(m_swapChain->GetCurrentBackBufferIndex());
 }
 
-IDXGISwapChain3 *SwapChain::operator->()
+void SwapChain::Present(UINT syncInterval, UINT flags)
 {
-    return m_swapChain.Get();
+    ThrowIfFailed(m_swapChain->Present(syncInterval, flags));
 }
 
 } // namespace zdx
