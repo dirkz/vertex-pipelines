@@ -21,6 +21,7 @@ struct DXWindow : WindowCallback
     void OnRender() override;
 
   private:
+    void CreateRootSignature();
     void UploadBuffers();
     void RecordRenderCommands(CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle);
 
@@ -32,6 +33,7 @@ struct DXWindow : WindowCallback
     std::unique_ptr<Fence> m_mainFence;
     ComPtr<ID3D12Resource1> m_vertexBuffer;
     ComPtr<ID3D12Resource1> m_indexBuffer;
+    ComPtr<ID3D12RootSignature> m_rootSignature;
 };
 
 } // namespace zdx
