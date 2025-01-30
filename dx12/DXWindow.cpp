@@ -204,6 +204,9 @@ void DXWindow::UploadBuffers()
     m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
     m_mainFence->SignalAndWait(m_commandQueue.Get());
+
+    m_vertexBuffer = vertexBuffer.Buffer();
+    m_indexBuffer = indexBuffer.Buffer();
 }
 
 void DXWindow::RecordRenderCommands(CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle)

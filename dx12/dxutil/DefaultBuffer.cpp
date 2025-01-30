@@ -36,4 +36,9 @@ DefaultBuffer::DefaultBuffer(ID3D12Device *pDevice, ID3D12GraphicsCommandList *p
     pCommandList->ResourceBarrier(1, &transition2);
 }
 
+ComPtr<ID3D12Resource1> DefaultBuffer::Buffer()
+{
+    return m_defaultBuffer;
+}
+
 } // namespace zdx

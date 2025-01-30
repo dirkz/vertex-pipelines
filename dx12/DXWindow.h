@@ -30,6 +30,8 @@ struct DXWindow : WindowCallback
     ComPtr<ID3D12GraphicsCommandList> m_commandList;
     std::array<std::unique_ptr<Frame>, NumFrames> m_frames;
     std::unique_ptr<Fence> m_mainFence;
+    ComPtr<ID3D12Resource1> m_vertexBuffer;
+    ComPtr<ID3D12Resource1> m_indexBuffer;
 };
 
 } // namespace zdx
