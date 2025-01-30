@@ -22,7 +22,6 @@ Shader::Shader(const std::wstring &filenameFragment, const std::string &entryPoi
 
 ComPtr<ID3DBlob> Shader::Code()
 {
-    UINT size = m_codeBlob->GetBufferSize();
     void *pCode = m_codeBlob->GetBufferPointer();
     return m_codeBlob;
 }
