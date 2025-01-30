@@ -7,6 +7,7 @@
 #include "Frame.h"
 #include "SwapChain.h"
 #include "WindowCallback.h"
+#include "Fence.h"
 
 namespace zdx
 {
@@ -20,6 +21,7 @@ struct DXWindow : WindowCallback
     void OnRender() override;
 
   private:
+    void UploadBuffers();
     void RecordRenderCommands(CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle);
 
     ComPtr<ID3D12Device4> m_device;
@@ -27,6 +29,7 @@ struct DXWindow : WindowCallback
     std::unique_ptr<SwapChain> m_swapChain;
     ComPtr<ID3D12GraphicsCommandList> m_commandList;
     std::array<std::unique_ptr<Frame>, NumFrames> m_frames;
+    std::unique_ptr<Fence> m_mainFence;
 };
 
 } // namespace zdx

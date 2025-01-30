@@ -12,6 +12,7 @@ struct Fence
 
     void Signal(ID3D12CommandQueue *pCommandQueue);
     void Wait();
+    void SignalAndWait(ID3D12CommandQueue *pCommandQueue);
 
   private:
     ComPtr<ID3D12Fence> m_fence;

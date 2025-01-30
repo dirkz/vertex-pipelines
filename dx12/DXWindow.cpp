@@ -1,7 +1,9 @@
 #include "DXWindow.h"
 
+#include "DefaultBuffer.h"
 #include "Error.h"
 #include "Shader.h"
+#include "Vertex.h"
 
 namespace zdx
 {
@@ -100,6 +102,8 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
 
     ThrowIfFailed(device.As(&m_device));
 
+    m_mainFence.reset(new Fence{m_device.Get()});
+
     // Describe and create the command queue.
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
     queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
@@ -123,8 +127,7 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
         m_frames[n].reset(new Frame{m_device.Get()});
     }
 
-    Shader vertexShader{L"shaders\\basic_triangle.hlsl_VS.cso", "VS", "vs_5_1"};
-    Shader pixelShader{L"shaders\\basic_triangle.hlsl_PS.cso", "PS", "vs_5_1"};
+    UploadBuffers();
 }
 
 void DXWindow::OnUpdate()
@@ -170,6 +173,37 @@ void DXWindow::OnRender()
     m_swapChain->Present(1, 0);
 
     pFrame->Signal(m_commandQueue.Get());
+}
+
+void DXWindow::UploadBuffers()
+{
+    Shader vertexShader{L"shaders\\basic_triangle.hlsl_VS.cso", "VS", "vs_5_1"};
+    Shader pixelShader{L"shaders\\basic_triangle.hlsl_PS.cso", "PS", "vs_5_1"};
+
+    std::array<Vertex, 3> vertices{Vertex{-0.5, -0.5, 0, Colors::Red},
+                                   Vertex{0.0, 0.5, 0, Colors::Green},
+                                   Vertex{0.5, -0.5, 0, Colors::Blue}};
+
+    std::array<UINT16, 3> indices{0, 1, 2};
+
+    ComPtr<ID3D12CommandAllocator> commandAllocator;
+    ThrowIfFailed(m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                                   IID_PPV_ARGS(commandAllocator.GetAddressOf())));
+
+    ThrowIfFailed(commandAllocator->Reset());
+    ThrowIfFailed(m_commandList->Reset(commandAllocator.Get(), nullptr));
+
+    DefaultBuffer vertexBuffer{m_device.Get(), m_commandList.Get(), vertices.size(),
+                               vertices.data()};
+    DefaultBuffer indexBuffer{m_device.Get(), m_commandList.Get(), indices.size(), indices.data()};
+
+    ThrowIfFailed(m_commandList->Close());
+
+    // Execute the command list.
+    ID3D12CommandList *ppCommandLists[] = {m_commandList.Get()};
+    m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
+
+    m_mainFence->SignalAndWait(m_commandQueue.Get());
 }
 
 void DXWindow::RecordRenderCommands(CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle)

@@ -48,4 +48,10 @@ void Fence::Wait()
     }
 }
 
+void Fence::SignalAndWait(ID3D12CommandQueue *pCommandQueue)
+{
+    Signal(pCommandQueue);
+    Wait();
+}
+
 } // namespace zdx
