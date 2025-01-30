@@ -34,14 +34,13 @@ void Fence::Signal(ID3D12CommandQueue *pCommandQueue)
 
 void Fence::Wait()
 {
-    UINT64 completedValue = m_fence->GetCompletedValue();
-
-    if (completedValue == InitialFenceValue)
+    if (m_value == InitialFenceValue)
     {
+        // Has never been signaled, no need to wait.
         return;
     }
 
-    if (completedValue < m_value)
+    if (m_fence->GetCompletedValue() < m_value)
     {
         ThrowIfFailed(m_fence->SetEventOnCompletion(m_value, m_event));
         WaitForSingleObject(m_event, INFINITE);
