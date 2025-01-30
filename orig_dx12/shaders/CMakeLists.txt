@@ -1,0 +1,31 @@
+set (SHADERS basic_triangle.hlsl)
+
+add_custom_target(shaders)
+
+foreach(SHADER ${SHADERS})
+	set (SHADER_SRC ${CMAKE_CURRENT_SOURCE_DIR}/${SHADER})
+	set (SHADER_OUTPUT_FILENAME_VS ${SHADER}_VS.cso)
+	set (SHADER_OUTPUT_FILENAME_PS ${SHADER}_PS.cso)
+	set (SHADER_TARGET_VS ${CMAKE_CURRENT_BINARY_DIR}/${SHADER_OUTPUT_FILENAME_VS})
+	set (SHADER_TARGET_PS ${CMAKE_CURRENT_BINARY_DIR}/${SHADER_OUTPUT_FILENAME_PS})
+
+	IF(CMAKE_BUILD_TYPE MATCHES Debug)
+		set (FXC_OPTIONS /Od /Zi)
+	ENDIF()
+
+	add_custom_command(
+		OUTPUT ${SHADER_TARGET_VS}
+		DEPENDS ${SHADER_SRC}
+		COMMAND fxc ARGS ${FXC_OPTIONS} /T vs_5_1 /E VS /Fo ${SHADER_TARGET_VS} ${SHADER_SRC}
+	)
+
+	add_custom_command(
+		OUTPUT ${SHADER_TARGET_PS}
+		DEPENDS ${SHADER_SRC}
+		COMMAND fxc ARGS ${FXC_OPTIONS} /T ps_5_1 /E PS /Fo ${SHADER_TARGET_PS} ${SHADER_SRC}
+	)
+
+	target_sources(shaders PRIVATE ${SHADER_TARGET_VS} ${SHADER_TARGET_PS})
+endforeach()
+
+add_dependencies(dxultra shaders)
