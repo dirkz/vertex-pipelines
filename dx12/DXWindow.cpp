@@ -148,9 +148,7 @@ void DXWindow::OnRender()
     // Indicate that the back buffer will be used as a render target.
     m_commandList->ResourceBarrier(1, &transitionPresentToRenderTarget);
 
-    // Record commands.
-    const float clearColor[] = {0.0f, 0.2f, 0.4f, 1.0f};
-    m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+    RecordRenderCommands(rtvHandle);
 
     auto transitionRenderTargetToPresent = CD3DX12_RESOURCE_BARRIER::Transition(
         pRenderTarget, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
@@ -168,6 +166,12 @@ void DXWindow::OnRender()
     m_swapChain->Present(1, 0);
 
     pFrame->Signal(m_commandQueue.Get());
+}
+
+void DXWindow::RecordRenderCommands(CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle)
+{
+    const float clearColor[] = {0.0f, 0.2f, 0.4f, 1.0f};
+    m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 }
 
 } // namespace zdx
