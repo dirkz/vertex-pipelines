@@ -16,6 +16,8 @@ add_subdirectory(common)
 add_subdirectory(windows)
 add_subdirectory(dxutil)
 
+add_subdirectory(shaders)
+
 add_executable(dx12
 	WIN32
 	main.cpp
@@ -29,5 +31,7 @@ target_include_directories(dx12 PRIVATE ${DIRECTX_HEADER_PATH})
 target_link_libraries(dx12 PRIVATE common)
 target_link_libraries(dx12 PRIVATE windows)
 target_link_libraries(dx12 PRIVATE dxutil)
+
+add_dependencies(dx12 shaders)
 
 target_link_libraries(dx12 PRIVATE d3d12.lib dxgi.lib)
