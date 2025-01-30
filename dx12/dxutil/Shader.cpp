@@ -29,10 +29,10 @@ ComPtr<ID3DBlob> Shader::Code()
 
 std::wstring Shader::ShaderSourceBasePath()
 {
-#ifdef DXULTRA_SHADER_PATH
+#ifdef DX_SHADER_PATH
 #define WSTRING1(x) L#x
 #define WSTRING(x) WSTRING1(x)
-    const wchar_t *pShaderBasePath = WSTRING(DXULTRA_SHADER_PATH);
+    const wchar_t *pShaderBasePath = WSTRING(DX_SHADER_PATH);
     if (pShaderBasePath && wcslen(pShaderBasePath) > 0)
     {
         std::wstring shaderPathOrig{pShaderBasePath};
@@ -146,4 +146,4 @@ ComPtr<ID3DBlob> Shader::CompileFromSource(const std::wstring &filenameFragment,
     return code;
 }
 
-} // namespace dxultra
+} // namespace zdx

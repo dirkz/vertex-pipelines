@@ -27,4 +27,4 @@ struct Shader
     std::string m_target;
 };
 
-} // namespace dxultra
+} // namespace zdx
