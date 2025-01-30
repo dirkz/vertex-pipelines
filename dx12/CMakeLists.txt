@@ -24,7 +24,7 @@ add_executable(dx12
 	DXWindow.h
 	DXWindow.cpp
 	Frame.h
-	Frame.cpp)
+	Frame.cpp "Vertex.h" "Vertex.cpp")
 
 target_include_directories(dx12 PRIVATE ${DIRECTX_HEADER_PATH})
 
