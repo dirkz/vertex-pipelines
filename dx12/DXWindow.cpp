@@ -1,6 +1,7 @@
 #include "DXWindow.h"
 
 #include "Error.h"
+#include "Shader.h"
 
 namespace zdx
 {
@@ -121,6 +122,9 @@ void DXWindow::OnInit(HWND hwnd, UINT width, UINT height)
     {
         m_frames[n].reset(new Frame{m_device.Get()});
     }
+
+    Shader vertexShader{L"shaders\\basic_triangle.hlsl_VS.cso", "VS", "vs_5_1"};
+    Shader pixelShader{L"shaders\\basic_triangle.hlsl_PS.cso", "PS", "vs_5_1"};
 }
 
 void DXWindow::OnUpdate()

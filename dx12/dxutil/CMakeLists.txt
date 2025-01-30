@@ -5,7 +5,9 @@ add_library(dxutil
 	Fence.h
 	Fence.cpp
 	SwapChain.h
-	SwapChain.cpp)
+	SwapChain.cpp
+	Shader.h
+	Shader.cpp)
 
 target_include_directories(dxutil PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

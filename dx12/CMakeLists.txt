@@ -34,4 +34,4 @@ target_link_libraries(dx12 PRIVATE dxutil)
 
 add_dependencies(dx12 shaders)
 
-target_link_libraries(dx12 PRIVATE d3d12.lib dxgi.lib)
+target_link_libraries(dx12 PRIVATE d3d12.lib dxgi.lib D3DCompiler.lib)
