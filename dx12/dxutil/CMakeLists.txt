@@ -1,14 +1,12 @@
 add_library(dxutil
 	OBJECT
+	DescriptorHeap.h
 	DescriptorHeap.cpp
+	Fence.h
 	Fence.cpp
+	SwapChain.h
 	SwapChain.cpp)
 
-target_sources(dxutil PUBLIC Constants.h Error.h DescriptorHeap.h Fence.h SwapChain.h)
+target_include_directories(dxutil PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_include_directories(dxutil
-	PRIVATE
-	${CMAKE_CURRENT_LIST_DIR}/../../DirectX-Headers/include/directx)
-
-target_precompile_headers(dxutil
-	PRIVATE stdafx.h)
+target_link_libraries(dxutil PRIVATE common)
