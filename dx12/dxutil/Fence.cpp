@@ -17,7 +17,7 @@ Fence::Fence(ID3D12Device *pDevice)
     m_event = CreateEvent(nullptr, FALSE, FALSE, nullptr);
     if (m_event == nullptr)
     {
-        ThrowIfFailed(HRESULT_FROM_WIN32(GetLastError()));
+        CheckLastError();
     }
 }
 
