@@ -1,8 +1,10 @@
 add_library(windows
 	OBJECT
 	Window.h
+	Window.cpp
 	WindowCallback.h
-	Window.cpp)
+	Strings.h
+	Strings.cpp)
 
 target_include_directories(windows PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
